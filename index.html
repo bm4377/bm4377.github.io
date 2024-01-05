@@ -2,11 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @font-face {
+            font-family: 'YourCustomFont';
+            src: url('path-to-your-font/YourCustomFont.woff2') format('woff2'),
+                 url('path-to-your-font/YourCustomFont.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'YourCustomFont', Arial, sans-serif; /* Use your custom font as the first choice */
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            height: 100vh;
+        }
+
+        /* Rest of your CSS styles remain unchanged */
+
+    </style>
+    <title>Scrollable Responsive Columns with Custom Font</title>
 </head>
 <body>
 
-    <h1>Hello, World!</h1>
+    <a href="https://your-custom-link1.com" target="_blank" class="column">
+        <img src="https://your-image-link1.jpg" alt="Image 1">
+        <h2>Column 1</h2>
+        <!-- Add more content here for scrolling -->
+        <p>Your content for column 1 goes here. More details...</p>
+    </a>
+
+    <a href="https://your-custom-link2.com" target="_blank" class="column">
+        <img src="https://your-image-link2.jpg" alt="Image 2">
+        <h2>Column 2</h2>
+        <!-- Add more content here for scrolling -->
+        <p>Your content for column 2 goes here. More details...</p>
+    </a>
 
 </body>
 </html>
