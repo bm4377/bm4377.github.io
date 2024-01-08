@@ -1,47 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        @font-face {
-            font-family: 'YourCustomFont';
-            src: url('path-to-your-font/YourCustomFont.woff2') format('woff2'),
-                 url('path-to-your-font/YourCustomFont.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Football Livescore</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      overflow-y: scroll; /* Enable full page scrolling */
+      padding: 20px;
+      margin: 0;
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'YourCustomFont', Arial, sans-serif; /* Use your custom font as the first choice */
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-start;
-            height: 100vh;
-        }
+    .match-frame {
+      width: 100%;
+      max-width: 400px; /* Adjust max-width as needed */
+      height: 150px;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      margin-bottom: 20px;
+      position: relative;
+    }
 
-        /* Rest of your CSS styles remain unchanged */
+    .team-container {
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-    </style>
-    <title>Scrollable Responsive Columns with Custom Font</title>
+    .team-logo {
+      max-width: 50px; /* Adjust max-width as needed */
+      max-height: 50px; /* Adjust max-height as needed */
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .vs-word {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .match-link {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
 </head>
 <body>
 
-    <a href="https://your-custom-link1.com" target="_blank" class="column">
-        <img src="https://your-image-link1.jpg" alt="Image 1">
-        <h2>Column 1</h2>
-        <!-- Add more content here for scrolling -->
-        <p>Your content for column 1 goes here. More details...</p>
-    </a>
+  <a href="https://example.com/match1-details" class="match-link">
+    <div class="match-frame">
+      <div class="team-container">
+        <img src="https://example.com/team1-logo.jpg" alt="Team 1 Logo" class="team-logo">
+        <span>Team 1</span>
+        <span class="vs-word">VS</span>
+        <span>Team 2</span>
+        <img src="https://example.com/team2-logo.jpg" alt="Team 2 Logo" class="team-logo">
+      </div>
+    </div>
+  </a>
 
-    <a href="https://your-custom-link2.com" target="_blank" class="column">
-        <img src="https://your-image-link2.jpg" alt="Image 2">
-        <h2>Column 2</h2>
-        <!-- Add more content here for scrolling -->
-        <p>Your content for column 2 goes here. More details...</p>
-    </a>
+  <a href="https://example.com/match2-details" class="match-link">
+    <div class="match-frame">
+      <div class="team-container">
+        <img src="https://example.com/team3-logo.jpg" alt="Team 3 Logo" class="team-logo">
+        <span>Team 3</span>
+        <span class="vs-word">VS</span>
+        <span>Team 4</span>
+        <img src="https://example.com/team4-logo.jpg" alt="Team 4 Logo" class="team-logo">
+      </div>
+    </div>
+  </a>
+
+  <!-- Add more match frames for different matches -->
 
 </body>
 </html>
