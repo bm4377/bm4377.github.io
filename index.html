@@ -26,30 +26,28 @@
     }
 
     .team-container {
-      text-align: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
     }
 
     .team-logo {
       max-width: 50px; /* Adjust max-width as needed */
       max-height: 50px; /* Adjust max-height as needed */
       border-radius: 50%;
-      margin-bottom: 10px;
-    }
-
-    .team-name {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
+      margin-right: 10px;
     }
 
     .vs-word {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: bold;
       color: #333;
+      margin: 0 10px;
+    }
+
+    .team-name {
+      font-weight: bold;
     }
 
     .match-link {
@@ -63,11 +61,11 @@
   <a href="https://example.com/match1-details" class="match-link">
     <div class="match-frame">
       <div class="team-container">
-        <span class="team-name">Wigan</span>
         <img src="https://secure.cache.images.core.optasports.com/soccer/teams/150x150/686.png" alt="Team 1 Logo" class="team-logo">
+        <span class="team-name">Wigan</span>
         <span class="vs-word">VS</span>
-        <img src="https://secure.cache.images.core.optasports.com/soccer/teams/150x150/662.png" alt="Team 2 Logo" class="team-logo">
         <span class="team-name">Man U</span>
+        <img src="https://secure.cache.images.core.optasports.com/soccer/teams/150x150/662.png" alt="Team 2 Logo" class="team-logo">
       </div>
     </div>
   </a>
@@ -75,11 +73,11 @@
   <a href="https://example.com/match2-details" class="match-link">
     <div class="match-frame">
       <div class="team-container">
-        <span class="team-name">Team 3</span>
         <img src="https://example.com/team3-logo.jpg" alt="Team 3 Logo" class="team-logo">
+        <span class="team-name">Team 3</span>
         <span class="vs-word">VS</span>
-        <img src="https://example.com/team4-logo.jpg" alt="Team 4 Logo" class="team-logo">
         <span class="team-name">Team 4</span>
+        <img src="https://example.com/team4-logo.jpg" alt="Team 4 Logo" class="team-logo">
       </div>
     </div>
   </a>
