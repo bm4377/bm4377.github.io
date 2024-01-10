@@ -27,7 +27,6 @@
 
     .team-container {
       display: flex;
-      justify-content: center;
       align-items: center;
       height: 100%;
     }
@@ -43,22 +42,20 @@
       font-size: 24px;
       font-weight: bold;
       color: #333;
-      margin: 0 10px;
+      margin: 0 5px; /* Adjust spacing between team logo and VS word */
     }
 
     .team-name {
       font-weight: bold;
-      position: absolute;
     }
 
-    .team1-name {
-      left: 10px;
-      margin-right: 5px;
+    .team1-name,
+    .team2-name {
+      margin-right: 10px; /* Adjust spacing between team name and logo */
     }
 
     .team2-name {
-      right: 10px;
-      margin-left: 5px;
+      margin-left: 10px; /* Adjust spacing between team logo and team name */
     }
 
     .match-link {
@@ -72,11 +69,11 @@
   <a href="https://example.com/match1-details" class="match-link">
     <div class="match-frame">
       <div class="team-container">
-        <span class="team1-name team-name">Team 1</span>
-        <img src="https://example.com/team1-logo.jpg" alt="Team 1 Logo" class="team-logo">
+        <img src="https://secure.cache.images.core.optasports.com/soccer/teams/150x150/686.png" alt="Team 1 Logo" class="team-logo">
+        <span class="team1-name team-name">Wigen</span>
         <span class="vs-word">VS</span>
-        <img src="https://example.com/team2-logo.jpg" alt="Team 2 Logo" class="team-logo">
-        <span class="team2-name team-name">Team 2</span>
+        <img src="https://secure.cache.images.core.optasports.com/soccer/teams/150x150/662.png" alt="Team 2 Logo" class="team-logo">
+        <span class="team2-name team-name">Man U</span>
       </div>
     </div>
   </a>
@@ -84,8 +81,8 @@
   <a href="https://example.com/match2-details" class="match-link">
     <div class="match-frame">
       <div class="team-container">
-        <span class="team1-name team-name">Team 3</span>
         <img src="https://example.com/team3-logo.jpg" alt="Team 3 Logo" class="team-logo">
+        <span class="team1-name team-name">Team 3</span>
         <span class="vs-word">VS</span>
         <img src="https://example.com/team4-logo.jpg" alt="Team 4 Logo" class="team-logo">
         <span class="team2-name team-name">Team 4</span>
