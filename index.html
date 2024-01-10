@@ -27,6 +27,7 @@
 
     .team-container {
       display: flex;
+      justify-content: center;
       align-items: center;
       height: 100%;
     }
@@ -42,24 +43,22 @@
       font-size: 24px;
       font-weight: bold;
       color: #333;
-      margin: 0 5px; /* Adjust spacing between team logo and VS word */
+      margin: 0 10px;
     }
 
     .team-name {
       font-weight: bold;
-    }
-
-    .team1-name,
-    .team2-name {
-      margin-right: 10px; /* Adjust spacing between team name and logo */
+      position: absolute;
     }
 
     .team1-name {
-      order: -1; /* Order first team's name first */
+      left: 10px;
+      margin-right: 5px;
     }
 
     .team2-name {
-      order: 1; /* Order second team's name second */
+      right: 10px;
+      margin-left: 5px;
     }
 
     .match-link {
@@ -76,8 +75,8 @@
         <span class="team1-name team-name">Wigan</span>
         <img src="https://secure.cache.images.core.optasports.com/soccer/teams/150x150/686.png" alt="Team 1 Logo" class="team-logo">
         <span class="vs-word">VS</span>
-        <span class="team2-name team-name">Man U</span>
         <img src="https://secure.cache.images.core.optasports.com/soccer/teams/150x150/662.png" alt="Team 2 Logo" class="team-logo">
+        <span class="team2-name team-name">Man U</span>
       </div>
     </div>
   </a>
@@ -88,8 +87,8 @@
         <span class="team1-name team-name">Team 3</span>
         <img src="https://example.com/team3-logo.jpg" alt="Team 3 Logo" class="team-logo">
         <span class="vs-word">VS</span>
-        <span class="team2-name team-name">Team 4</span>
         <img src="https://example.com/team4-logo.jpg" alt="Team 4 Logo" class="team-logo">
+        <span class="team2-name team-name">Team 4</span>
       </div>
     </div>
   </a>
