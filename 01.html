@@ -1,21 +1,55 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player</title>
+    <title>Responsive Video Player</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            background-color: #000;
+        }
+    </style>
 </head>
 <body>
+    <div class="video-container">
+        <video controls oncontextmenu="return false" id="videoPlayer">
+            <source src="">
+            <source src="https://play1nm.hnyongshun.cn/live/sd-23xmvkhp5vv9qg8.m3u8" type="application/x-mpegURL">
+            <!-- Add additional source tags for other formats if needed -->
+            Your browser does not support the video tag.
+        </video>
 
-<video controls width="100%">
-    <!-- MP4 video source -->
-    <source src="example.mp4" type="video/mp4">
-    <!-- HLS video source for browsers that support HLS (M3U8) -->
-    <source src="https://hls.streambtw.com/live/stream_5.m3u8" type="application/x-mpegURL">
-    <!-- Fallback content for non-supported browsers -->
-    Your browser does not support the video tag.
-</video>
+        <script>
+            document.getElementById('videoPlayer').addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
 
+            document.getElementById('videoPlayer').addEventListener('click', function () {
+                var videoPlayer = this;
+                if (videoPlayer.requestFullscreen) {
+                    videoPlayer.requestFullscreen();
+                } else if (videoPlayer.mozRequestFullScreen) { // Firefox
+                    videoPlayer.mozRequestFullScreen();
+                } else if (videoPlayer.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                    videoPlayer.webkitRequestFullscreen();
+                }
+            });
+        </script>
+    </div>
 </body>
 </html>
-
