@@ -72,6 +72,8 @@
         </video>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const videoUrl = urlParams.get('videoUrl');
@@ -90,7 +92,22 @@
                 thumbnail.style.display = 'none';
                 playButton.style.display = 'none';
                 videoPlayer.style.display = 'block';
-                videoPlayer.src = videoUrl;
+
+                // Check if the video URL is an .m3u8 file (HLS)
+                if (videoUrl.endsWith('.m3u8')) {
+                    // Initialize hls.js for .m3u8 support
+                    if (Hls.isSupported()) {
+                        const hls = new Hls();
+                        hls.loadSource(videoUrl);
+                        hls.attachMedia(videoPlayer);
+                    } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+                        // For Safari or other browsers with native .m3u8 support
+                        videoPlayer.src = videoUrl;
+                    }
+                } else {
+                    // For non-HLS video URLs (e.g., MP4)
+                    videoPlayer.src = videoUrl;
+                }
                 videoPlayer.play();
             });
         } else {
