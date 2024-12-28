@@ -14,33 +14,54 @@
             min-height: 100vh;
             background-color: #000;
         }
-        video {
+        .video-container {
+            position: relative;
             width: 100%;
             max-width: 940px; /* Optional max-width for the player */
-            height: 410px;
-            background-color: #000;
+            height: auto;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            display: none; /* Initially hide the video */
+        }
+        .thumbnail {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <video id="videoPlayer" controls>
-        Your browser does not support the video tag.
-    </video>
+    <div id="video-container" class="video-container">
+        <img id="thumbnail" class="thumbnail" src="" alt="Video Thumbnail" />
+        <video id="videoPlayer" controls>
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const videoUrl = urlParams.get('videoUrl');
+        const thumbnailUrl = urlParams.get('thumbnailUrl');
         
         const videoPlayer = document.getElementById('videoPlayer');
+        const thumbnail = document.getElementById('thumbnail');
         
-        if (videoUrl) {
-            videoPlayer.src = videoUrl;
-            videoPlayer.addEventListener('loadedmetadata', function() {
+        if (videoUrl && thumbnailUrl) {
+            // Set the thumbnail image and video URL
+            thumbnail.src = thumbnailUrl;
+            
+            // When the thumbnail is clicked, hide it and show the video player
+            thumbnail.addEventListener('click', () => {
+                thumbnail.style.display = 'none';
+                videoPlayer.style.display = 'block';
+                videoPlayer.src = videoUrl;
                 videoPlayer.play();
             });
         } else {
-            alert('No video URL provided!');
+            alert('No video URL or thumbnail URL provided!');
         }
     </script>
 
