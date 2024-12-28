@@ -14,31 +14,120 @@
             min-height: 100vh;
             background-color: #000;
         }
-        video {
+
+        #videoContainer {
+            position: relative;
             width: 100%;
             max-width: 940px; /* Optional max-width for the player */
             height: 410px;
             background-color: #000;
         }
+
+        video {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Red border loading spinner */
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid red; /* Red color */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            display: none; /* Hidden by default */
+        }
+
+        /* Animation for the spinner */
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Custom Play Button */
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            border: 3px solid red; /* Red border for play button */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 30px;
+            color: red;
+            z-index: 10; /* Ensure it stays on top */
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .play-btn:hover {
+            background-color: rgba(255, 0, 0, 0.1); /* Slight hover effect */
+        }
+
+        .play-btn.hide {
+            opacity: 0; /* Hide the play button after video starts */
+        }
+
     </style>
 </head>
 <body>
 
-    <video id="videoPlayer" controls>
-        Your browser does not support the video tag.
-    </video>
+    <div id="videoContainer">
+        <video id="videoPlayer" controls>
+            Your browser does not support the video tag.
+        </video>
+        <div id="loadingSpinner" class="loading-spinner"></div>
+        <div id="playButton" class="play-btn">&#9658;</div> <!-- Play icon -->
+    </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const videoUrl = urlParams.get('videoUrl');
         
         const videoPlayer = document.getElementById('videoPlayer');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const playButton = document.getElementById('playButton');
         
         if (videoUrl) {
             videoPlayer.src = videoUrl;
+            loadingSpinner.style.display = 'block'; // Show the spinner while loading
+            playButton.style.display = 'block'; // Show the play button initially
+            
             videoPlayer.addEventListener('loadedmetadata', function() {
                 videoPlayer.play();
+                loadingSpinner.style.display = 'none'; // Hide the spinner once the video starts
+                playButton.classList.add('hide'); // Hide the play button once video starts playing
             });
+
+            // Optional: Add an event listener for when the video starts playing
+            videoPlayer.addEventListener('play', function() {
+                playButton.classList.add('hide'); // Hide the play button
+                playButton.style.borderColor = 'red'; // Change border to red
+                playButton.style.color = 'red'; // Change icon color to red
+            });
+
+            // Play the video when the play button is clicked
+            playButton.addEventListener('click', function() {
+                if (videoPlayer.paused) {
+                    videoPlayer.play();
+                    playButton.classList.add('hide'); // Hide the play button
+                } else {
+                    videoPlayer.pause(); // Pause if the video is playing
+                    playButton.style.display = 'block'; // Show the play button again
+                }
+            });
+
         } else {
             alert('No video URL provided!');
         }
@@ -46,5 +135,3 @@
 
 </body>
 </html>
-
-
