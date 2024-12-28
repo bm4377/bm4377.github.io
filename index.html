@@ -17,29 +17,27 @@
         .video-container {
             position: relative;
             width: 100%;
-            max-width: 940px;
-            height: auto;
+            max-width: 100%;
+            background-color: #000;
         }
         video {
             width: 100%;
-            height: auto;
+            height: 100%;
             display: none; /* Initially hide the video */
         }
         .thumbnail {
             width: 100%;
-            height: auto;
-            cursor: pointer;
-            position: relative;
+            height: 100%;
+            object-fit: cover;
         }
-        /* Play button style */
         .play-button {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+            width: 90px;
+            height: 90px;
+            background: #FF0000; /* Red background */
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -48,72 +46,89 @@
             transition: transform 0.2s, background 0.3s;
         }
         .play-button:hover {
-            background: rgba(255, 255, 255, 1); /* Solid white background on hover */
+            background: #CC0000; /* Darker red on hover */
             transform: translate(-50%, -50%) scale(1.1);
         }
         .play-icon {
             width: 0;
             height: 0;
-            border-left: 20px solid #000;
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
+            border-left: 30px solid white; /* White play icon */
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+        }
+
+        /* Media query for small screens */
+        @media (max-width: 480px) {
+            .play-button {
+                width: 70px;
+                height: 70px;
+            }
+            .play-icon {
+                border-left: 25px solid white;
+            }
         }
     </style>
 </head>
 <body>
-
     <div id="video-container" class="video-container">
-        <img id="thumbnail" class="thumbnail" src="" alt="Video Thumbnail" />
+        <img id="thumbnail" class="thumbnail" src="https://assets-prd.ignimgs.com/2024/08/15/blackmythwukong-review-blogroll-1723762612149.jpg" alt="Video Thumbnail">
         <div id="playButton" class="play-button">
             <div class="play-icon"></div>
         </div>
         <video id="videoPlayer" controls>
+            <source src="" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const videoUrl = urlParams.get('videoUrl');
-        const thumbnailUrl = urlParams.get('thumbnailUrl');
-        
         const videoPlayer = document.getElementById('videoPlayer');
         const thumbnail = document.getElementById('thumbnail');
         const playButton = document.getElementById('playButton');
-        
-        if (videoUrl && thumbnailUrl) {
-            // Set the thumbnail image and video URL
-            thumbnail.src = thumbnailUrl;
-            
-            // When the thumbnail (with play icon) is clicked, hide it and show the video player
-            playButton.addEventListener('click', () => {
-                thumbnail.style.display = 'none';
-                playButton.style.display = 'none';
-                videoPlayer.style.display = 'block';
+        const videoContainer = document.getElementById('video-container');
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoUrl = urlParams.get('videoUrl');
 
-                // Check if the video URL is an .m3u8 file (HLS)
-                if (videoUrl.endsWith('.m3u8')) {
-                    // Initialize hls.js for .m3u8 support
-                    if (Hls.isSupported()) {
-                        const hls = new Hls();
-                        hls.loadSource(videoUrl);
-                        hls.attachMedia(videoPlayer);
-                    } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-                        // For Safari or other browsers with native .m3u8 support
-                        videoPlayer.src = videoUrl;
-                    }
+        // Check if the video URL is provided
+        if (videoUrl) {
+            // Determine if it's an HLS (m3u8) stream or MP4 file
+            if (videoUrl.endsWith('.m3u8')) {
+                if (Hls.isSupported()) {
+                    const hls = new Hls({
+                        startLevel: -1,
+                        capLevelToPlayerSize: true,
+                        maxBufferLength: 30, 
+                        maxBufferSize: 60 * 1000 * 1000, 
+                        maxMaxBufferLength: 30,
+                        nudgeOffset: 0.1,
+                        startFragPrefetch: true
+                    });
+                    hls.loadSource(videoUrl);
+                    hls.attachMedia(videoPlayer);
+
+                    hls.on(Hls.Events.ERROR, function(event, data) {
+                        if (data.fatal) {
+                            console.error('HLS.js fatal error:', data);
+                        }
+                    });
                 } else {
-                    // For non-HLS video URLs (e.g., MP4)
-                    videoPlayer.src = videoUrl;
+                    alert('HLS is not supported in your browser.');
                 }
-                videoPlayer.play();
-            });
+            } else {
+                videoPlayer.src = videoUrl;
+            }
         } else {
-            alert('No video URL or thumbnail URL provided!');
+            alert('No video URL provided!');
         }
-    </script>
 
+        // Play video and hide thumbnail/play button
+        playButton.addEventListener('click', () => {
+            thumbnail.style.display = 'none';
+            playButton.style.display = 'none';
+            videoPlayer.style.display = 'block';
+            videoPlayer.play();
+        });
+    </script>
 </body>
 </html>
