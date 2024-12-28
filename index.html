@@ -75,11 +75,11 @@
             <div class="play-icon"></div>
         </div>
         <video id="videoPlayer" controls>
-            <source src="" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.0.0/dist/hls.min.js"></script>
     <script>
         const videoPlayer = document.getElementById('videoPlayer');
         const thumbnail = document.getElementById('thumbnail');
@@ -88,8 +88,21 @@
         const urlParams = new URLSearchParams(window.location.search);
         const videoUrl = urlParams.get('videoUrl');
 
+        // Check if the video URL is present and set it for the video player
         if (videoUrl) {
-            videoPlayer.src = videoUrl;
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(videoUrl);  // Load the .m3u8 stream
+                hls.attachMedia(videoPlayer);  // Attach the HLS stream to the video element
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    videoPlayer.style.display = 'block'; // Show the video player once manifest is parsed
+                });
+            } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+                videoPlayer.src = videoUrl; // Use the native player if browser supports HLS natively
+                videoPlayer.style.display = 'block'; // Show the video player
+            } else {
+                alert('Your browser does not support HLS streaming');
+            }
         } else {
             alert('No video URL provided!');
         }
@@ -108,7 +121,6 @@
         playButton.addEventListener('click', () => {
             thumbnail.style.display = 'none';
             playButton.style.display = 'none';
-            videoPlayer.style.display = 'block';
             videoPlayer.play();
         });
     </script>
