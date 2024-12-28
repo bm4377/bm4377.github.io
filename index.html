@@ -34,14 +34,7 @@
             position: absolute;
             top: 0;
             left: 0;
-        }
-
-        /* Media query for small screens */
-        @media (max-width: 480px) {
-            .play-button {
-                width: 70px;
-                height: 70px;
-            }
+            cursor: pointer; /* Indicate that the image is clickable */
         }
     </style>
 </head>
@@ -57,7 +50,6 @@
     <script>
         const videoPlayer = document.getElementById('videoPlayer');
         const thumbnail = document.getElementById('thumbnail');
-        const videoContainer = document.getElementById('video-container');
         const urlParams = new URLSearchParams(window.location.search);
         const videoUrl = urlParams.get('videoUrl');
 
