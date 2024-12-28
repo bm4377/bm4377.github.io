@@ -14,121 +14,37 @@
             min-height: 100vh;
             background-color: #000;
         }
-        .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            background-color: #000;
-        }
         video {
             width: 100%;
-            height: 100%;
-            display: none; /* Initially hide the video */
-        }
-        .thumbnail {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90px;
-            height: 90px;
-            background: #FF0000; /* Red background */
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
-        }
-        .play-button:hover {
-            background: #CC0000; /* Darker red on hover */
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-        .play-icon {
-            width: 0;
-            height: 0;
-            border-left: 30px solid white; /* White play icon */
-            border-top: 20px solid transparent;
-            border-bottom: 20px solid transparent;
-        }
-
-        /* Media query for small screens */
-        @media (max-width: 480px) {
-            .play-button {
-                width: 70px;
-                height: 70px;
-            }
-            .play-icon {
-                border-left: 25px solid white;
-            }
+            max-width: 940px; /* Optional max-width for the player */
+            height: 410px;
+            background-color: #000;
         }
     </style>
 </head>
 <body>
-    <div id="video-container" class="video-container">
-        <img id="thumbnail" class="thumbnail" src="https://assets-prd.ignimgs.com/2024/08/15/blackmythwukong-review-blogroll-1723762612149.jpg" alt="Video Thumbnail">
-        <div id="playButton" class="play-button">
-            <div class="play-icon"></div>
-        </div>
-        <video id="videoPlayer" controls>
-            <source src="" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <video id="videoPlayer" controls>
+        Your browser does not support the video tag.
+    </video>
+
     <script>
-        const videoPlayer = document.getElementById('videoPlayer');
-        const thumbnail = document.getElementById('thumbnail');
-        const playButton = document.getElementById('playButton');
-        const videoContainer = document.getElementById('video-container');
         const urlParams = new URLSearchParams(window.location.search);
         const videoUrl = urlParams.get('videoUrl');
-
-        // Check if the video URL is provided
+        
+        const videoPlayer = document.getElementById('videoPlayer');
+        
         if (videoUrl) {
-            // Determine if it's an HLS (m3u8) stream or MP4 file
-            if (videoUrl.endsWith('.m3u8')) {
-                if (Hls.isSupported()) {
-                    const hls = new Hls({
-                        startLevel: -1,
-                        capLevelToPlayerSize: true,
-                        maxBufferLength: 30, 
-                        maxBufferSize: 60 * 1000 * 1000, 
-                        maxMaxBufferLength: 30,
-                        nudgeOffset: 0.1,
-                        startFragPrefetch: true
-                    });
-                    hls.loadSource(videoUrl);
-                    hls.attachMedia(videoPlayer);
-
-                    hls.on(Hls.Events.ERROR, function(event, data) {
-                        if (data.fatal) {
-                            console.error('HLS.js fatal error:', data);
-                        }
-                    });
-                } else {
-                    alert('HLS is not supported in your browser.');
-                }
-            } else {
-                videoPlayer.src = videoUrl;
-            }
+            videoPlayer.src = videoUrl;
+            videoPlayer.addEventListener('loadedmetadata', function() {
+                videoPlayer.play();
+            });
         } else {
             alert('No video URL provided!');
         }
-
-        // Play video and hide thumbnail/play button
-        playButton.addEventListener('click', () => {
-            thumbnail.style.display = 'none';
-            playButton.style.display = 'none';
-            videoPlayer.style.display = 'block';
-            videoPlayer.play();
-        });
     </script>
+
 </body>
 </html>
+
+
