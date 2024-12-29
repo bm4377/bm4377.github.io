@@ -7,17 +7,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="player">
-        <video id="video" src="https://hello-world-silent-sun-f8f9.koyehtaeoo.workers.dev/0:/amongooseandblack_mamba_fighttothedeath.mp4" muted></video>
-        <div class="controls">
-            <button id="play-pause">▶</button>
-            <div class="progress-bar">
-                <div class="progress"></div>
-            </div>
-            <span id="current-time">00:00</span> / <span id="duration">00:00</span>
-            <button id="mute-unmute">🔊</button>
-            <button id="fullscreen">⛶</button>
-        </div>
+    <div class="player-container">
+        <video id="videoPlayer" controls></video>
     </div>
 
     <script src="script.js"></script>
