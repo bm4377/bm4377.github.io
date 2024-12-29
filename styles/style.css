@@ -1,0 +1,19 @@
+/* Apply true black background to the entire body */
+body {
+    background-color: #000000; /* True black background */
+    color: #ffffff;            /* White text for contrast */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the player container */
+#player {
+    background-color: #000000; /* True black */
+    width: 100%;
+    max-width: 800px; /* Adjust the maximum width of the player */
+    height: 450px;    /* Adjust the height of the player */
+    margin: 20px auto; /* Center the player on the page and give some margin */
+    border: 1px solid #ffffff; /* Optional: Add a border for better visibility */
+}
+
