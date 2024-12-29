@@ -11,8 +11,8 @@ body {
 
 /* Video Container */
 .video-container {
-    width: 940px;
-    height: 410px;
+    width: 100%;
+    max-width: 940px; /* Maximum width for larger screens */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,7 +21,13 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Video.js Custom Styling */
+/* Make Video Element Responsive */
+.video-js {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Video.js Skin Customization */
 .vjs-default-skin {
     color: #fff; /* White text for controls */
     background-color: #000; /* Black background */
@@ -41,4 +47,26 @@ body {
 .vjs-fullscreen {
     width: 100vw !important;
     height: 100vh !important;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .video-container {
+        max-width: 100%; /* Allow full width */
+        padding: 0; /* Remove padding for smaller screens */
+    }
+
+    .vjs-default-skin {
+        font-size: 12px; /* Reduce control bar font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .video-container {
+        max-width: 100%; /* Full width for very small screens */
+    }
+
+    .vjs-default-skin .vjs-control-bar {
+        font-size: 10px; /* Further reduce font size for tiny screens */
+    }
 }
