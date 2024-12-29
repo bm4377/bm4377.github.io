@@ -1,16 +1,12 @@
-// Get the video URL from query parameters
-const urlParams = new URLSearchParams(window.location.search);
-const videoUrl = urlParams.get('videoUrl');
-
-// Initialize Video.js Player
-const videoPlayer = videojs('videoPlayer');
-
-// Load video dynamically
-if (videoUrl) {
-    videoPlayer.src({ src: videoUrl, type: 'video/mp4' });
-    videoPlayer.ready(function () {
-        this.play(); // Auto-play the video once ready
-    });
-} else {
-    alert('No video URL provided!');
-}
+const player = new DPlayer({
+    container: document.getElementById('player-container'),
+    video: {
+        url: 'path/to/your/video.mp4' // Replace with your actual video URL
+    },
+    // Optional settings (customize as needed)
+    autoplay: false, // Start playback automatically
+    muted: false,
+    loop: false,
+    volume: 0.7,
+    // ... other DPlayer options 
+});
