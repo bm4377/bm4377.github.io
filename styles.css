@@ -9,14 +9,28 @@ body {
     background-color: #000;
 }
 
-/* Video.js Skin Customization */
+/* Video Container */
+.video-container {
+    width: 940px;
+    height: 410px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    border: 1px solid #333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Video.js Custom Styling */
 .vjs-default-skin {
     color: #fff; /* White text for controls */
     background-color: #000; /* Black background */
+    border-radius: 5px; /* Rounded corners */
 }
 
 .vjs-default-skin .vjs-control-bar {
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent control bar */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent control bar */
+    font-size: 14px;
 }
 
 .vjs-default-skin .vjs-slider {
