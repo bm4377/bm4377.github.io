@@ -1,6 +1,7 @@
 .player {
     width: 640px; /* Adjust as needed */
     position: relative;
+    background-color: #181818; /* Dark background */
 }
 
 video {
@@ -12,11 +13,11 @@ video {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    color: #fff; /* White text */
 }
 
 button {
@@ -25,6 +26,7 @@ button {
     color: #fff;
     font-size: 18px;
     cursor: pointer;
+    margin: 0 5px;
 }
 
 .progress-bar {
@@ -40,22 +42,7 @@ button {
     width: 0%;
 }
 
-#volume {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 50px;
-    height: 5px;
-    background-color: #333;
-    outline: none;
+#current-time,
+#duration {
+    margin: 0 10px;
 }
-
-#volume::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #fff;
-}
-
-/* Add more CSS to style the player according to your preferences */
