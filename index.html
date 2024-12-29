@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGen Player</title>
-    
+    <title>Custom Video Player</title>
+
     <!-- Video.js Library -->
     <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet">
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <video id="videoPlayer" class="video-js vjs-default-skin" controls preload="auto" width="940" height="410" data-setup="{}">
-        <source src="" type="video/mp4" />
-        Your browser does not support the video tag.
-    </video>
+    <div class="video-container">
+        <video id="videoPlayer" class="video-js vjs-default-skin" controls preload="auto" width="940" height="410" poster="poster.jpg" data-setup="{}">
+            <source src="" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
     <!-- Video.js Script -->
     <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
-    
+
     <!-- Custom JavaScript -->
     <script src="script.js"></script>
 </body>
