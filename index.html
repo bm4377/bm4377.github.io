@@ -3,13 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player.js Video Player</title>
-    <link rel="stylesheet" href="style.css"> 
+    <title>NextGen Player</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #000;
+        }
+        video {
+            width: 100%;
+            max-width: 940px; /* Optional max-width for the player */
+            height: 410px;
+            background-color: #000;
+        }
+    </style>
 </head>
 <body>
-    <div id="player-container"></div>
 
-    <script src="playerjs.js"></script> 
-    <script src="script.js"></script>
+    <video id="videoPlayer" controls>
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoUrl = urlParams.get('videoUrl');
+        
+        const videoPlayer = document.getElementById('videoPlayer');
+        
+        if (videoUrl) {
+            videoPlayer.src = videoUrl;
+            videoPlayer.addEventListener('loadedmetadata', function() {
+                videoPlayer.play();
+            });
+        } else {
+            alert('No video URL provided!');
+        }
+    </script>
+
 </body>
 </html>
