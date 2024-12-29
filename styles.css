@@ -1,0 +1,30 @@
+/* General Body Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #000;
+}
+
+/* Video.js Skin Customization */
+.vjs-default-skin {
+    color: #fff; /* White text for controls */
+    background-color: #000; /* Black background */
+}
+
+.vjs-default-skin .vjs-control-bar {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent control bar */
+}
+
+.vjs-default-skin .vjs-slider {
+    background: #f00; /* Red progress bar */
+}
+
+/* Fullscreen Mode */
+.vjs-fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+}
