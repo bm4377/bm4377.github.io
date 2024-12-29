@@ -4,9 +4,11 @@ const progressBar = document.querySelector('.progress-bar');
 const progress = document.querySelector('.progress');
 const currentTimeEl = document.getElementById('current-time');
 const durationEl = document.getElementById('duration');
-const volumeSlider = document.getElementById('volume');
+const muteUnmuteBtn = document.getElementById('mute-unmute');
+const fullscreenBtn = document.getElementById('fullscreen');
 
 let isPlaying = false;
+let isMuted = false;
 
 // Update progress bar and current time
 function updateProgress() {
@@ -48,11 +50,27 @@ progressBar.addEventListener('click', (event) => {
     video.currentTime = (percent / 100) * video.duration;
 });
 
-// Handle volume change
-volumeSlider.addEventListener('input', () => {
-    video.volume = volumeSlider.value;
+// Handle mute/unmute button click
+muteUnmuteBtn.addEventListener('click', () => {
+    if (isMuted) {
+        video.muted = false;
+        muteUnmuteBtn.textContent = '🔊';
+    } else {
+        video.muted = true;
+        muteUnmuteBtn.textContent = '🔇';
+    }
+    isMuted = !isMuted;
 });
 
-// Initial volume
-video.volume = 0.5;
-volumeSlider.value = 0.5;
+// Handle fullscreen button click
+fullscreenBtn.addEventListener('click', () => {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        video.requestFullscreen();
+    }
+});
+
+// Initial state
+video.muted = true;
+muteUnmuteBtn.textContent = '🔊';
