@@ -8,14 +8,15 @@
 </head>
 <body>
     <div class="player">
-        <video id="video" src="https://hello-world-silent-sun-f8f9.koyehtaeoo.workers.dev/0:/amongooseandblack_mamba_fighttothedeath.mp4" controls></video>
+        <video id="video" src="path/to/your/video.mp4" muted></video>
         <div class="controls">
             <button id="play-pause">▶</button>
             <div class="progress-bar">
                 <div class="progress"></div>
             </div>
             <span id="current-time">00:00</span> / <span id="duration">00:00</span>
-            <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
+            <button id="mute-unmute">🔊</button>
+            <button id="fullscreen">⛶</button>
         </div>
     </div>
 
