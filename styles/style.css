@@ -1,26 +1,24 @@
-/* Apply true black background to the entire viewport */
-html, body {
-    background-color: #000000; /* True black background */
-    color: #ffffff;            /* White text for contrast */
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+/* Style the body to fill the full screen and center content */
+body, html {
     height: 100%;
-    overflow: hidden;          /* Prevent scrolling */
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: #f0f0f0; /* Background color (light gray) */
 }
 
-/* Center the player and style the container */
+/* Container for the player */
+#player-container {
+    width: 80%; /* Adjust as needed */
+    height: 80%; /* Adjust as needed */
+    display: flex;
+    justify-content: center; /* Center the player horizontally inside the container */
+    align-items: center; /* Center the player vertically inside the container */
+}
+
+/* Style the player */
 #player {
-    background-color: #000000; /* True black for the player area */
-    width: 100%;
-    max-width: 800px; /* Adjust the maximum width of the player */
-    height: 510px;    /* Adjust the height of the player */
-    margin: auto;     /* Center the player horizontally */
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border: none; /* No border for a seamless look */
+    width: 100%; /* Full width of its container */
+    height: 100%; /* Full height of its container */
 }
