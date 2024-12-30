@@ -10,9 +10,7 @@
 <body>
 
     <!-- Player Container -->
-    <div id="player-container">
-        <div id="player"></div>
-    </div>
+    <div id="player"></div>
 
     <!-- Link to Player.js (Make sure it's in the correct path) -->
     <script src="js/playerjs.js"></script>
@@ -25,7 +23,7 @@
             return urlParams.get(name);
         }
 
-        // Get video URL from query string
+        // Get video URL from query string (no default URL now)
         var videoUrl = getQueryParam("video");
 
         if (!videoUrl) {
