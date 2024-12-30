@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGen Player</title>
+    <title>My Player Project</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <h1></h1>
 
     <!-- Player Container -->
     <div id="player"></div>
 
-    <!-- Link to Player.js -->
+    <!-- Link to Player.js (Make sure it's in the correct path) -->
     <script src="js/playerjs.js"></script>
 
     <!-- Initialize the Player -->
     <script>
         var player = new Playerjs({
             id: "player",
-            file: "https://zbpull3.todaysun.com/live/5529769126820515233.m3u8", // Replace with your video file URL
+            file: "https://example.com/video.mp4", // Replace with your video file URL
             autoplay: false,
             controls: true,
         });
