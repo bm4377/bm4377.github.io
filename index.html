@@ -3,40 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGen vPlayer</title>
-    <style>
-        /* Fullscreen container for player */
-        #player-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Full height of the viewport */
-            background-color: #000; /* True black background */
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Player dimensions */
-        #player {
-            width: 800px;
-            height: 450px; /* Standard 16:9 aspect ratio */
-        }
-    </style>
+    <title>NextGen Player</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <!-- Player Container -->
-    <div id="player-container">
-        <div id="player"></div>
-    </div>
 
-    <!-- Include Player.js Script -->
-    <script src="https://lvstream.ddns.net/playerjs.js"></script>
+    <!-- Player Container -->
+    <div id="player"></div>
+
+    <!-- Link to Player.js (Make sure it's in the correct path) -->
+    <script src="js/playerjs.js"></script>
 
     <!-- Initialize the Player -->
     <script>
         var player = new Playerjs({
             id: "player",
-            file: "https://example.com/video.mp4", // Replace with your video URL
+            file: "https://zbpull3.todaysun.com/live/5529769126820515233.m3u8", // Replace with your video file URL
             autoplay: false,
             controls: true,
         });
