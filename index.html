@@ -17,12 +17,27 @@
 
     <!-- Initialize the Player -->
     <script>
-        var player = new Playerjs({
-            id: "player",
-            file: "https://zbpull3.todaysun.com/live/5633817867230657680.m3u8", // Replace with your video file URL
-            autoplay: false,
-            controls: true,
-        });
+        // Function to get URL parameter
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Get video URL from query string (no default URL now)
+        var videoUrl = getQueryParam("video");
+
+        if (!videoUrl) {
+            alert("No video URL provided!");
+        } else {
+            // Initialize the player with the video URL
+            var player = new Playerjs({
+                id: "player",
+                file: videoUrl,
+                autoplay: false,
+                controls: true,
+            });
+        }
     </script>
+
 </body>
 </html>
