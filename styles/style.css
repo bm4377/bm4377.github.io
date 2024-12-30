@@ -1,6 +1,6 @@
 /* Apply true black background to the entire viewport */
 html, body {
-    background-color: #d3d3d3; /* True black background */
+    background-color: #000000; /* True black background */
     color: #ffffff;            /* White text for contrast */
     font-family: Arial, sans-serif;
     margin: 0;
