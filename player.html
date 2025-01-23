@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Player</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #000;
+        }
+        video {
+            width: 100%;
+            max-width: 940px; /* Optional max-width for the player */
+            height: 410px;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <video id="videoPlayer" controls>
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoUrl = urlParams.get('videoUrl');
+        
+        const videoPlayer = document.getElementById('videoPlayer');
+        
+        if (videoUrl) {
+            videoPlayer.src = videoUrl;
+            videoPlayer.addEventListener('loadedmetadata', function() {
+                videoPlayer.play();
+            });
+        } else {
+            alert('No video URL provided!');
+        }
+    </script>
+
+</body>
+</html>
+
+Simple SingleUrl Player
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Player</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #000;
+        }
+        video {
+            width: 100%;
+            max-width: 940px; /* Optional max-width for the player */
+            height: 410px;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <video id="videoPlayer" controls>
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoUrl = urlParams.get('videoUrl');
+        
+        const videoPlayer = document.getElementById('videoPlayer');
+        
+        if (videoUrl) {
+            videoPlayer.src = videoUrl;
+            videoPlayer.addEventListener('loadedmetadata', function() {
+                videoPlayer.play();
+            });
+        } else {
+            alert('No video URL provided!');
+        }
+    </script>
+
+</body>
+</html>
+
