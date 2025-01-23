@@ -14,87 +14,103 @@
             min-height: 100vh;
             background-color: #000;
         }
-        video {
+        .video-container {
+            position: relative;
             width: 100%;
-            max-width: 940px; /* Optional max-width for the player */
-            height: 410px;
             background-color: #000;
         }
-    </style>
-</head>
-<body>
-
-    <video id="videoPlayer" controls>
-        Your browser does not support the video tag.
-    </video>
-
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const videoUrl = urlParams.get('videoUrl');
-        
-        const videoPlayer = document.getElementById('videoPlayer');
-        
-        if (videoUrl) {
-            videoPlayer.src = videoUrl;
-            videoPlayer.addEventListener('loadedmetadata', function() {
-                videoPlayer.play();
-            });
-        } else {
-            alert('No video URL provided!');
+        video {
+            width: 100%;
+            height: 100%;
+            display: none; /* Initially hide the video */
         }
-    </script>
-
-</body>
-</html>
-
-Simple SingleUrl Player
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGen Player</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
+        .thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            background: #FF0000; /* Red background */
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: #000;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
         }
-        video {
-            width: 100%;
-            max-width: 940px; /* Optional max-width for the player */
-            height: 410px;
-            background-color: #000;
+        .play-button:hover {
+            background: #CC0000; /* Darker red on hover */
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 30px solid white; /* White play icon */
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+        }
+
+        /* Media query for small screens */
+        @media (max-width: 480px) {
+            .play-button {
+                width: 70px;
+                height: 70px;
+            }
+            .play-icon {
+                border-left: 25px solid white;
+            }
         }
     </style>
 </head>
 <body>
-
-    <video id="videoPlayer" controls>
-        Your browser does not support the video tag.
-    </video>
+    <div id="video-container" class="video-container">
+        <img id="thumbnail" class="thumbnail" src="https://assets-prd.ignimgs.com/2024/08/15/blackmythwukong-review-blogroll-1723762612149.jpg" alt="Video Thumbnail">
+        <div id="playButton" class="play-button">
+            <div class="play-icon"></div>
+        </div>
+        <video id="videoPlayer" controls>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
     <script>
+        const videoPlayer = document.getElementById('videoPlayer');
+        const thumbnail = document.getElementById('thumbnail');
+        const playButton = document.getElementById('playButton');
+        const videoContainer = document.getElementById('video-container');
         const urlParams = new URLSearchParams(window.location.search);
         const videoUrl = urlParams.get('videoUrl');
-        
-        const videoPlayer = document.getElementById('videoPlayer');
-        
+
         if (videoUrl) {
             videoPlayer.src = videoUrl;
-            videoPlayer.addEventListener('loadedmetadata', function() {
-                videoPlayer.play();
-            });
         } else {
             alert('No video URL provided!');
         }
-    </script>
 
+        // Wait for video metadata to load and calculate aspect ratio dynamically
+        videoPlayer.addEventListener('loadedmetadata', () => {
+            const videoWidth = videoPlayer.videoWidth;
+            const videoHeight = videoPlayer.videoHeight;
+            const aspectRatio = videoWidth / videoHeight;
+
+            // Set the container's aspect ratio based on the video's ratio
+            videoContainer.style.aspectRatio = `${aspectRatio}`;
+        });
+
+        // Play video and hide thumbnail/play button
+        playButton.addEventListener('click', () => {
+            thumbnail.style.display = 'none';
+            playButton.style.display = 'none';
+            videoPlayer.style.display = 'block';
+            videoPlayer.play();
+        });
+    </script>
 </body>
 </html>
-
