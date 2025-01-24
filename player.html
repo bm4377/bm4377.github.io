@@ -1,116 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGen Player</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #000;
-        }
-        .video-container {
-            position: relative;
-            width: 100%;
-            background-color: #000;
-        }
-        video {
-            width: 100%;
-            height: 100%;
-            display: none; /* Initially hide the video */
-        }
-        .thumbnail {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90px;
-            height: 90px;
-            background: #FF0000; /* Red background */
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
-        }
-        .play-button:hover {
-            background: #CC0000; /* Darker red on hover */
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-        .play-icon {
-            width: 0;
-            height: 0;
-            border-left: 30px solid white; /* White play icon */
-            border-top: 20px solid transparent;
-            border-bottom: 20px solid transparent;
-        }
-
-        /* Media query for small screens */
-        @media (max-width: 480px) {
-            .play-button {
-                width: 70px;
-                height: 70px;
-            }
-            .play-icon {
-                border-left: 25px solid white;
-            }
-        }
-    </style>
+<title>Production-Ready Video Player</title>
+<link href="https://vjs.zencdn.net/8.0.0/video-js.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="video-container" class="video-container">
-        <img id="thumbnail" class="thumbnail" src="https://assets-prd.ignimgs.com/2024/08/15/blackmythwukong-review-blogroll-1723762612149.jpg" alt="Video Thumbnail">
-        <div id="playButton" class="play-button">
-            <div class="play-icon"></div>
-        </div>
-        <video id="videoPlayer" controls>
-            <source src="" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
 
-    <script>
-        const videoPlayer = document.getElementById('videoPlayer');
-        const thumbnail = document.getElementById('thumbnail');
-        const playButton = document.getElementById('playButton');
-        const videoContainer = document.getElementById('video-container');
-        const urlParams = new URLSearchParams(window.location.search);
-        const videoUrl = urlParams.get('videoUrl');
+<script>
+function getUrlParameter(name) {
+  var url = window.location.search.substring(1);
+  var vars = url.split('&');
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split('=');
+    if (pair[0] == name) {
+      return pair[1];
+    }
+  }
+  return "";
+}
 
-        if (videoUrl) {
-            videoPlayer.src = videoUrl;
-        } else {
-            alert('No video URL provided!');
-        }
+function getVideoType(url) {
+  // Determine the file type based on the URL extension
+  return url.endsWith(".m3u8") ? "application/x-mpegURL" : (url.endsWith(".flv") ? "video/x-flv" : "video/mp4"); 
+}
 
-        // Wait for video metadata to load and calculate aspect ratio dynamically
-        videoPlayer.addEventListener('loadedmetadata', () => {
-            const videoWidth = videoPlayer.videoWidth;
-            const videoHeight = videoPlayer.videoHeight;
-            const aspectRatio = videoWidth / videoHeight;
+var videoUrl = getUrlParameter('videourl');
+if (videoUrl) {
+  var player = videojs('my-video', { techOrder: ["html5","flash"] });
+  player.src({
+    src: videoUrl,
+    type: getVideoType(videoUrl)
+  });
+  player.load();
+  player.play();
+} else {
+  console.error("Missing videourl parameter in the URL");
+}
+</script>
 
-            // Set the container's aspect ratio based on the video's ratio
-            videoContainer.style.aspectRatio = `${aspectRatio}`;
-        });
+<video
+  id="my-video"
+  class="video-js vjs-big-play-centered"
+  controls
+  preload="auto"
+>
+</video>
 
-        // Play video and hide thumbnail/play button
-        playButton.addEventListener('click', () => {
-            thumbnail.style.display = 'none';
-            playButton.style.display = 'none';
-            videoPlayer.style.display = 'block';
-            videoPlayer.play();
-        });
-    </script>
 </body>
 </html>
