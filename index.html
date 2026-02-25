@@ -4,39 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vlogmm Player</title>
-    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="styles/style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    
+    <script src="js/playerjs.js"></script>
+
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; background: #000; overflow: hidden; }
+        #player { width: 100vw; height: 100vh; }
+    </style>
 </head>
 <body>
 
-    <!-- Player Container -->
     <div id="player"></div>
 
-    <!-- Link to Player.js (Make sure it's in the correct path) -->
-    <script src="js/playerjs.js"></script>
-
-    <!-- Initialize the Player -->
     <script>
-        // Function to get URL parameter
+        // URL ကနေ parameter ယူတဲ့ function
         function getQueryParam(name) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name);
         }
 
-        // Get video URL from query string (no default URL now)
+        // App ရဲ့ WebView ကနေ ပို့လိုက်တဲ့ Link (ဥပမာ- https://vlogmm.ddns.net/01.m3u8)
         var videoUrl = getQueryParam("video");
 
         if (!videoUrl) {
             alert("No video URL provided!");
         } else {
-            // Initialize the player with the video URL
+            // Player.js ကို Initialize လုပ်ခြင်း
             var player = new Playerjs({
                 id: "player",
                 file: videoUrl,
-                autoplay: false,
+                autoplay: true, // WebView မှာ တန်းပွင့်အောင် true ထားပေးလိုက်ပါတယ်
                 controls: true,
+                // HLS (.m3u8) link တွေအတွက် နောက်ကွယ်ကနေ အလုပ်လုပ်ပေးမယ့် engine
+                hls: true 
             });
         }
+
+        /* မှတ်ချက် - Player.js က Hls.js library ကို အလိုအလျောက် သိရှိပြီး 
+           m3u8 link တွေကို Player.js UI နဲ့ပဲ Play ပေးပါလိမ့်မယ်။
+        */
     </script>
 
 </body>
