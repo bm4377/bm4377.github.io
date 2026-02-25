@@ -3,41 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vlogmm Player</title>
-    <!-- Link to external CSS file -->
+    <title>Vlogmm Universal Player</title>
     <link rel="stylesheet" href="styles/style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+    <script src="js/playerjs.js"></script>
+
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; background: #000; overflow: hidden; }
+        #player, #twitch-player, #hls-video { width: 100vw; height: 100vh; display: none; }
+        video { width: 100%; height: 100%; background: #000; }
+    </style>
 </head>
 <body>
 
-    <!-- Player Container -->
     <div id="player"></div>
 
-    <!-- Link to Player.js (Make sure it's in the correct path) -->
-    <script src="js/playerjs.js"></script>
+    <div id="twitch-player"></div>
 
-    <!-- Initialize the Player -->
+    <div id="hls-container">
+        <video id="hls-video" controls autoplay playsinline></video>
+    </div>
+
     <script>
-        // Function to get URL parameter
         function getQueryParam(name) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name);
         }
 
-        // Get video URL from query string (no default URL now)
-        var videoUrl = getQueryParam("video");
+        var videoInput = getQueryParam("video");
 
-        if (!videoUrl) {
+        if (!videoInput) {
             alert("No video URL provided!");
         } else {
-            // Initialize the player with the video URL
-            var player = new Playerjs({
-                id: "player",
-                file: videoUrl,
-                autoplay: false,
-                controls: true,
-            });
+            // အခြေအနေ (က) - Link အရှည်ကြီး (m3u8) ဖြစ်နေလျှင်
+            if (videoInput.includes(".m3u8") || videoInput.includes("ttvnw.net")) {
+                document.getElementById('hls-video').style.display = 'block';
+                var video = document.getElementById('hls-video');
+                
+                if (Hls.isSupported()) {
+                    var hls = new Hls();
+                    hls.loadSource(videoInput);
+                    hls.attachMedia(video);
+                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                    video.src = videoInput;
+                }
+            } 
+            // အခြေအနေ (ခ) - Twitch Channel Name သက်သက် ဖြစ်နေလျှင် (Link မဟုတ်လျှင်)
+            else if (!videoInput.includes("://")) {
+                document.getElementById('twitch-player').style.display = 'block';
+                new Twitch.Player("twitch-player", {
+                    width: "100%",
+                    height: "100%",
+                    channel: videoInput,
+                    parent: ["localhost", window.location.hostname], // လက်ရှိ GitHub Domain ကို Auto ယူမယ်
+                    autoplay: true
+                });
+            } 
+            // အခြေအနေ (ဂ) - အခြား ပုံမှန် Video Link များအတွက် Player.js သုံးမယ်
+            else {
+                document.getElementById('player').style.display = 'block';
+                var player = new Playerjs({
+                    id: "player",
+                    file: videoInput,
+                    autoplay: true,
+                    controls: true,
+                });
+            }
         }
     </script>
-
 </body>
 </html>
